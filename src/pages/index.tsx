@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto flex flex-col items-center justify-start min-h-screen p-4 bg-zinc-800">
+      <main className="container mx-auto flex flex-col items-center justify-start w-screen h-screen p-4 bg-zinc-800">
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-200">
           Welcome to <span className="text-red-400">Blais.gg</span>
         </h1>
