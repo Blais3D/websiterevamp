@@ -5,15 +5,21 @@ import classNames from "classnames";
 
 let dex = Math.round(Math.random() * 905 + 0.5);
 
+const nextShiny = (mon: number) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/${mon}.png`;
+
+const nextNormal = (mon: number) =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${mon}.png`;
+
+//for (let i = 1; i <= 905; i++) {
+//new Image().src = nextShiny(i);
+//new Image().src = nextNormal(i);
+//}
+
+const divName =
+  "container flex flex-wrap items-center justify-start gap-5 w-40 h-40 rounded-md border-4 border-gray-900";
+
 const Home: NextPage = () => {
-  const nextShiny = (mon: number) =>
-    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/${mon}.png`;
-  const nextNormal = (mon: number) =>
-    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${mon}.png`;
-
-  //new Image().src = nextNormal(dex);
-  //new Image().src = nextShiny(dex);
-
   const [streak, setStreak] = useState(0);
 
   const set = async (right: boolean) => {
@@ -33,9 +39,6 @@ const Home: NextPage = () => {
       setTimeout(() => reset(), 1000);
     }
   };
-
-  const divName =
-    "container flex flex-wrap items-center justify-start gap-5 w-40 h-40 rounded-md border-4 border-gray-900";
 
   const [guess, setGuess] = useState(false); // false = unguessed true = wrong
 
