@@ -3,8 +3,17 @@ import Head from "next/head";
 import React, { useState } from "react";
 import classNames from "classnames";
 
+let dex = Math.round(Math.random() * 905 + 0.5);
+
 const Home: NextPage = () => {
-  const [dex, setDex] = useState(Math.round(Math.random() * 905 + 0.5));
+  const nextShiny = (mon: number) =>
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/${mon}.png`;
+  const nextNormal = (mon: number) =>
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${mon}.png`;
+
+  //new Image().src = nextNormal(dex);
+  //new Image().src = nextShiny(dex);
+
   const [streak, setStreak] = useState(0);
 
   const set = async (right: boolean) => {
@@ -13,9 +22,9 @@ const Home: NextPage = () => {
   };
 
   const reset = () => {
-    setGuess(false);
-    setDex(Math.round(Math.random() * 905 + 0.5));
     setRand(Math.random() > 0.5);
+    setGuess(false);
+    dex = Math.round(Math.random() * 905 + 0.5);
   };
 
   const contain = async (right: boolean) => {
@@ -43,10 +52,7 @@ const Home: NextPage = () => {
   const showShiny = () => {
     return (
       <div className={shinyClass} onClick={() => contain(true)}>
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/${dex}.png`}
-          className="w-full"
-        />
+        <img src={nextShiny(dex)} className="w-full" />
       </div>
     );
   };
@@ -54,10 +60,7 @@ const Home: NextPage = () => {
   const showNormal = () => {
     return (
       <div className={normalClass} onClick={() => contain(false)}>
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${dex}.png`}
-          className="w-full"
-        />
+        <img src={nextNormal(dex)} className="w-full" />
       </div>
     );
   };
