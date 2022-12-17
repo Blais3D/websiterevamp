@@ -123,6 +123,7 @@ const Vote: NextPage = () => {
   );
 };
 
+//This part makes it so that random is set on load and is not predetermined on Next
 const ClientOnlyVote = dynamic(() => Promise.resolve(Vote), { ssr: false });
 
 const Home = () => {

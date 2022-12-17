@@ -234,7 +234,7 @@ const Home: NextPage = () => {
   }> = (props) => {
     return (
       <button
-        className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-700 p-2 bg-gray-600 w-10 h-10"
+        className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-400 p-2 bg-gray-300 w-10 h-10"
         onClick={() => acceptLetter(props.letter)}
       >
         {props.letter.toUpperCase()}
@@ -321,7 +321,7 @@ const Home: NextPage = () => {
             </div>
             <div className="flex justify-center items-center gap-1">
               <button
-                className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-700 p-2 bg-gray-600 h-10"
+                className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-400 p-2 bg-gray-400 h-10"
                 onClick={() => acceptLetter("Backspace")}
               >
                 Backspace
@@ -334,7 +334,7 @@ const Home: NextPage = () => {
               <KeyOnKeyboardEvent letter={"n"} />
               <KeyOnKeyboardEvent letter={"m"} />
               <button
-                className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-700 p-2 bg-gray-600 h-10"
+                className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-400 p-2 bg-gray-400 h-10"
                 onClick={() => acceptLetter("Enter")}
               >
                 Enter
