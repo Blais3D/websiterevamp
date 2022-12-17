@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
-//import { Image } from 'react-native';
 import classNames from "classnames";
 
 const nextShiny = (mon: number) =>
@@ -24,6 +23,10 @@ function dex() {
 
   next = Math.round(Math.random() * 905 + 0.5);
 
+  //new Image().src = nextShiny(pokeNum);
+
+  //new Image().src = nextNormal(pokeNum);
+
   return temp;
 }
 
@@ -33,9 +36,6 @@ const divName =
 let pokeNum = dex();
 
 const Home: NextPage = () => {
-  //new Image().src = nextShiny(pokeNum);
-
-  //new Image().src = nextNormal(pokeNum);
 
   const [streak, setStreak] = useState(0);
 

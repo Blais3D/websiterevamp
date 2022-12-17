@@ -1,11 +1,6 @@
-import classNames from "classnames";
-import { Console, debug } from "console";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { root } from "postcss";
 import React, { useState, KeyboardEvent, useEffect } from "react";
-import { number } from "zod";
-import { trpc } from "../utils/trpc";
 import { myWordsArray } from "../utils/words";
 
 enum LetterStatus {
