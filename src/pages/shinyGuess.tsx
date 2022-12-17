@@ -9,35 +9,21 @@ const nextShiny = (mon: number) =>
 const nextNormal = (mon: number) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${mon}.png`;
 
-let next = Math.round(Math.random() * 905 + 0.5);
-
 function dex() {
-  let temp = next;
+  const next = Math.round(Math.random() * 905 + 0.5);
+  // I like clean bs
+  if ([718, 774].includes(next)) return next + 1;
 
-  if (temp == 718) {
-    return 719;
-  }
-  if (temp == 774) {
-    return 775;
-  }
-
-  next = Math.round(Math.random() * 905 + 0.5);
-
-  //new Image().src = nextShiny(pokeNum);
-
-  //new Image().src = nextNormal(pokeNum);
-
-  return temp;
+  return next;
 }
 
 const divName =
   "container flex flex-wrap items-center justify-start gap-5 w-40 h-40 rounded-md border-4 border-gray-900";
 
-let pokeNum = dex();
-
 const Home: NextPage = () => {
-
   const [streak, setStreak] = useState(0);
+  const [currentMon, setCurrentMon] = useState(dex());
+  const [nextMon, setNextMon] = useState(dex());
 
   const set = async (right: boolean) => {
     setStreak(right ? streak + 1 : 0);
@@ -47,7 +33,19 @@ const Home: NextPage = () => {
   const reset = () => {
     setRand(Math.random() > 0.5);
     setGuess(false);
-    pokeNum = dex();
+
+    // Update current mon to next
+    setCurrentMon(nextMon);
+
+    // Select next mon
+    const newNext = dex();
+
+    // Cache images
+    new Image().src = nextShiny(newNext);
+    new Image().src = nextNormal(newNext);
+
+    // Update next
+    setNextMon(newNext);
   };
 
   const contain = async (right: boolean) => {
@@ -72,7 +70,7 @@ const Home: NextPage = () => {
   const showShiny = () => {
     return (
       <div className={shinyClass} onClick={() => contain(true)}>
-        <img src={nextShiny(pokeNum)} className="w-full" />
+        <img src={nextShiny(currentMon)} className="w-full" />
       </div>
     );
   };
@@ -80,7 +78,7 @@ const Home: NextPage = () => {
   const showNormal = () => {
     return (
       <div className={normalClass} onClick={() => contain(false)}>
-        <img src={nextNormal(pokeNum)} className="w-full" />
+        <img src={nextNormal(currentMon)} className="w-full" />
       </div>
     );
   };

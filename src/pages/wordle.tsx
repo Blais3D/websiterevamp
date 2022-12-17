@@ -55,7 +55,7 @@ class WordleBox extends React.Component<MyProps, MyState> {
     }
 
     const stringDiv =
-      "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 ";
+      "flex flex-col justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 w-20 h-20 ";
 
     return (
       <div className="flex flex-row space-x-2">
@@ -147,11 +147,15 @@ const Home: NextPage = () => {
   const [guess, setGuess] = useState(0);
 
   const handleKeyboardEvent = (e: React.KeyboardEvent<HTMLElement>) => {
+    acceptLetter(e.key);
+  };
+
+  const acceptLetter = (letter: string) => {
     if (!isOpen) {
-      if (e.key === "Backspace" && currentWord.length > 0) {
+      if (letter === "Backspace" && currentWord.length > 0) {
         setCurrentWord(currentWord.substring(0, currentWord.length - 1));
       } else if (
-        e.key === "Enter" &&
+        letter === "Enter" &&
         currentWord.length == 5 &&
         myWordsArray.includes(currentWord.toLowerCase())
       ) {
@@ -161,11 +165,11 @@ const Home: NextPage = () => {
           setIsOpen(true);
         }
       } else if (
-        e.key.length == 1 &&
+        letter.length == 1 &&
         currentWord.length < 5 &&
-        available.includes(e.key.toUpperCase())
+        available.includes(letter.toUpperCase())
       ) {
-        setCurrentWord(currentWord + e.key.toUpperCase());
+        setCurrentWord(currentWord + letter.toUpperCase());
       }
     }
   };
@@ -225,6 +229,19 @@ const Home: NextPage = () => {
     );
   };
 
+  const KeyOnKeyboardEvent: React.FC<{
+    letter: string;
+  }> = (props) => {
+    return (
+      <button
+        className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-700 p-2 bg-gray-600 w-10 h-10"
+        onClick={() => acceptLetter(props.letter)}
+      >
+        {props.letter.toUpperCase()}
+      </button>
+    );
+  };
+
   return (
     <>
       <Head>
@@ -234,48 +251,96 @@ const Home: NextPage = () => {
       </Head>
 
       <main
-        className="p-6 justify-center items-center overflow-hidden h-screen w-screen"
+        className="p-6 justify-center items-center overflow-hidden h-screen w-screen gap-2"
         tabIndex={0}
         onKeyUpCapture={handleKeyboardEvent}
       >
         {isOpen && <Popup />}
-        <div className="container flex flex-col items-center justify-center gap-5">
-          <WordleBox
-            currentWord={currentWord}
-            correctWord={theWord}
-            pos={0}
-            currentPos={guess}
-          />
-          <WordleBox
-            currentWord={currentWord}
-            correctWord={theWord}
-            pos={1}
-            currentPos={guess}
-          />
-          <WordleBox
-            currentWord={currentWord}
-            correctWord={theWord}
-            pos={2}
-            currentPos={guess}
-          />
-          <WordleBox
-            currentWord={currentWord}
-            correctWord={theWord}
-            pos={3}
-            currentPos={guess}
-          />
-          <WordleBox
-            currentWord={currentWord}
-            correctWord={theWord}
-            pos={4}
-            currentPos={guess}
-          />
-          <WordleBox
-            currentWord={currentWord}
-            correctWord={theWord}
-            pos={5}
-            currentPos={guess}
-          />
+        <div className="gap-2 flex flex-col justify-center items-center">
+          <div className="container flex flex-col items-center justify-center gap-2">
+            <WordleBox
+              currentWord={currentWord}
+              correctWord={theWord}
+              pos={0}
+              currentPos={guess}
+            />
+            <WordleBox
+              currentWord={currentWord}
+              correctWord={theWord}
+              pos={1}
+              currentPos={guess}
+            />
+            <WordleBox
+              currentWord={currentWord}
+              correctWord={theWord}
+              pos={2}
+              currentPos={guess}
+            />
+            <WordleBox
+              currentWord={currentWord}
+              correctWord={theWord}
+              pos={3}
+              currentPos={guess}
+            />
+            <WordleBox
+              currentWord={currentWord}
+              correctWord={theWord}
+              pos={4}
+              currentPos={guess}
+            />
+            <WordleBox
+              currentWord={currentWord}
+              correctWord={theWord}
+              pos={5}
+              currentPos={guess}
+            />
+          </div>
+          <div className="flex flex-col gap-3 items-center justify-center">
+            <div className="flex justify-center items-center gap-1">
+              <KeyOnKeyboardEvent letter={"q"} />
+              <KeyOnKeyboardEvent letter={"w"} />
+              <KeyOnKeyboardEvent letter={"e"} />
+              <KeyOnKeyboardEvent letter={"r"} />
+              <KeyOnKeyboardEvent letter={"t"} />
+              <KeyOnKeyboardEvent letter={"y"} />
+              <KeyOnKeyboardEvent letter={"u"} />
+              <KeyOnKeyboardEvent letter={"i"} />
+              <KeyOnKeyboardEvent letter={"o"} />
+              <KeyOnKeyboardEvent letter={"p"} />
+            </div>
+            <div className="flex justify-center items-center gap-1">
+              <KeyOnKeyboardEvent letter={"a"} />
+              <KeyOnKeyboardEvent letter={"s"} />
+              <KeyOnKeyboardEvent letter={"d"} />
+              <KeyOnKeyboardEvent letter={"f"} />
+              <KeyOnKeyboardEvent letter={"g"} />
+              <KeyOnKeyboardEvent letter={"h"} />
+              <KeyOnKeyboardEvent letter={"j"} />
+              <KeyOnKeyboardEvent letter={"k"} />
+              <KeyOnKeyboardEvent letter={"l"} />
+            </div>
+            <div className="flex justify-center items-center gap-1">
+              <button
+                className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-700 p-2 bg-gray-600 h-10"
+                onClick={() => acceptLetter("Backspace")}
+              >
+                Backspace
+              </button>
+              <KeyOnKeyboardEvent letter={"z"} />
+              <KeyOnKeyboardEvent letter={"x"} />
+              <KeyOnKeyboardEvent letter={"c"} />
+              <KeyOnKeyboardEvent letter={"v"} />
+              <KeyOnKeyboardEvent letter={"b"} />
+              <KeyOnKeyboardEvent letter={"n"} />
+              <KeyOnKeyboardEvent letter={"m"} />
+              <button
+                className="flex justify-center items-center text-base text-black text-center border-4 rounded-md border-gray-700 p-2 bg-gray-600 h-10"
+                onClick={() => acceptLetter("Enter")}
+              >
+                Enter
+              </button>
+            </div>
+          </div>
         </div>
       </main>
     </>
