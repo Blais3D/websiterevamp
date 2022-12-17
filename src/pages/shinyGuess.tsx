@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
@@ -20,7 +21,7 @@ function dex() {
 const divName =
   "container flex flex-wrap items-center justify-start gap-5 w-40 h-40 rounded-md border-4 border-gray-900";
 
-const Home: NextPage = () => {
+const Vote: NextPage = () => {
   const [streak, setStreak] = useState(0);
   const [currentMon, setCurrentMon] = useState(dex());
   const [nextMon, setNextMon] = useState(dex());
@@ -120,6 +121,12 @@ const Home: NextPage = () => {
       </main>
     </>
   );
+};
+
+const ClientOnlyVote = dynamic(() => Promise.resolve(Vote), { ssr: false });
+
+const Home = () => {
+  return <ClientOnlyVote />;
 };
 
 export default Home;
