@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
+//import { Image } from 'react-native';
 import classNames from "classnames";
 
 const nextShiny = (mon: number) =>
@@ -9,19 +10,20 @@ const nextShiny = (mon: number) =>
 const nextNormal = (mon: number) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${mon}.png`;
 
-//for (let i = 1; i <= 905; i++) {
-//new Image().src = nextShiny(i);
-//new Image().src = nextNormal(i);
-//}
+let next = Math.round(Math.random() * 905 + 0.5);
 
 function dex() {
-  let temp = Math.round(Math.random() * 905 + 0.5);
+  let temp = next;
+
   if (temp == 718) {
     return 719;
   }
   if (temp == 774) {
     return 775;
   }
+
+  next = Math.round(Math.random() * 905 + 0.5);
+
   return temp;
 }
 
@@ -31,6 +33,10 @@ const divName =
 let pokeNum = dex();
 
 const Home: NextPage = () => {
+  //new Image().src = nextShiny(pokeNum);
+
+  //new Image().src = nextNormal(pokeNum);
+
   const [streak, setStreak] = useState(0);
 
   const set = async (right: boolean) => {
